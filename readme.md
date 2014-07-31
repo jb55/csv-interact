@@ -14,7 +14,7 @@
 ```js
 var interact = require('csv-interact')
 
-// generate a new pdf, only including the name and age if they're over 20
+// generate a new csv, only including the name and age if they're over 20
 interact(function(record, done){
   if (+record.age > 20)
     this.push({ name: record.name, age: record.age })
