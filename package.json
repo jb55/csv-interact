@@ -2,7 +2,7 @@
   "name": "csv-interact",
   "description": "Write programs to easily interact with csv files",
   "keywords": ["csv", "interact"],
-  "version": "0.0.1",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/jb55/csv-interact.git"
