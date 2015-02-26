@@ -14,14 +14,15 @@ module.exports = function(fn, opts) {
   var delimiter = opts.delimiter || ",";
   var csvOpts = { delimiter: delimiter };
   var first = true;
+  var fast = opts.fields != null || opts.fast === true;
 
   var stream = process.stdin
   .pipe(csv.parse(csvOpts))
   .pipe(record(parser()))
   .pipe(through(function(obj, enc, done){
-    if (opts.fast && first) {
+    if (fast && first) {
       var keys = Object.keys(obj)
-      this.pipe(json2csv(keys))
+      this.pipe(json2csv(opts.fields || keys))
       .pipe(csv.stringify(csvOpts))
       .pipe(process.stdout);
     }
@@ -29,7 +30,7 @@ module.exports = function(fn, opts) {
     fn.call(this, obj, done);
   }))
 
-  if (!opts.fast) {
+  if (!fast) {
     stream
     .pipe(json2csv())
     .pipe(csv.stringify(csvOpts))

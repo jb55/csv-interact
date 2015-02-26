@@ -22,6 +22,24 @@ interact(function(record, done){
 });
 ```
 
+### Examples
+
+Streaming in constant space by specifying fields
+
+```js
+interact(function (record, done) {
+  this.push({ name: record.name })
+}, { fields: ["name" ] });
+```
+
+Or just pass `fast` to indicate you won't be adding or removing fields
+
+```js
+interact(function (record, done) {
+  record.name = record.name.toUpperCase();
+}, { fast: true });
+```
+
 ## License
 
   The MIT License (MIT)
